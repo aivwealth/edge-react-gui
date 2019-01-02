@@ -262,7 +262,11 @@ export default class Main extends Component<Props, State> {
       context: undefined
     }
     if (ENV.HIDE_IS_MOUNTED) {
-      YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'])
+      YellowBox.ignoreWarnings([
+        'Warning: isMounted(...) is deprecated',
+        'Module RCTImageLoader',
+        'The scalesPageToFit property is not supported when useWebKit = true'
+      ])
     }
   }
 
@@ -322,10 +326,7 @@ export default class Main extends Component<Props, State> {
       case 'edge-ret':
       case 'airbitz-ret':
       case 'https':
-        if (
-          parsedUri.host === 'recovery' ||
-          parsedUri.host === 'recovery.edgesecure.co'
-        ) {
+        if (parsedUri.host === 'recovery' || parsedUri.host === 'recovery.edgesecure.co') {
           this.handleRecoveryToken(parsedUri)
         } else {
           this.handleAddress(parsedUri, url)
